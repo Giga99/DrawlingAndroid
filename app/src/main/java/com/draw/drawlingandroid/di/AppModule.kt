@@ -1,5 +1,6 @@
 package com.draw.drawlingandroid.di
 
+import android.content.Context
 import com.draw.drawlingandroid.data.remote.api.SetupApi
 import com.draw.drawlingandroid.util.Constants.HTTP_BASE_URL
 import com.draw.drawlingandroid.util.Constants.HTTP_BASE_URL_LOCALHOST
@@ -9,6 +10,7 @@ import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +42,10 @@ object AppModule {
             .client(okHttpClient)
             .build()
             .create(SetupApi::class.java)
+
+    @Singleton
+    @Provides
+    fun provideApplicationContext(@ApplicationContext context: Context) = context
 
     @Singleton
     @Provides
