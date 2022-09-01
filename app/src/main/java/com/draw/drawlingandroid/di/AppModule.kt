@@ -2,6 +2,8 @@ package com.draw.drawlingandroid.di
 
 import android.content.Context
 import com.draw.drawlingandroid.data.remote.api.SetupApi
+import com.draw.drawlingandroid.repository.DefaultSetupRepository
+import com.draw.drawlingandroid.repository.SetupRepository
 import com.draw.drawlingandroid.util.Constants.HTTP_BASE_URL
 import com.draw.drawlingandroid.util.Constants.HTTP_BASE_URL_LOCALHOST
 import com.draw.drawlingandroid.util.Constants.USE_LOCALHOST
@@ -23,6 +25,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Singleton
+    @Provides
+    fun provideSetupRepository(
+        setupApi: SetupApi,
+        @ApplicationContext context: Context
+    ): SetupRepository = DefaultSetupRepository(setupApi, context)
 
     @Singleton
     @Provides

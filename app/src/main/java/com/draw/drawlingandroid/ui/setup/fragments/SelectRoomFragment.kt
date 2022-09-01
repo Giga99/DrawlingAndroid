@@ -3,9 +3,10 @@ package com.draw.drawlingandroid.ui.setup.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.draw.drawlingandroid.R
 import com.draw.drawlingandroid.databinding.FragmentSelectRoomBinding
 
-class SelectRoomFragment : Fragment() {
+class SelectRoomFragment : Fragment(R.layout.fragment_select_room) {
 
     private var _binding: FragmentSelectRoomBinding? = null
     private val binding: FragmentSelectRoomBinding

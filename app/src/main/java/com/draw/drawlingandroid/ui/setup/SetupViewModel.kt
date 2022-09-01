@@ -54,15 +54,15 @@ class SetupViewModel @Inject constructor(
             val trimmedUsername = username.trim()
             when {
                 trimmedUsername.isEmpty() -> {
-                    _setupEvent.tryEmit(SetupEvent.InputEmptyError)
+                    _setupEvent.emit(SetupEvent.InputEmptyError)
                 }
                 trimmedUsername.length < MIN_USERNAME_LENGTH -> {
-                    _setupEvent.tryEmit(SetupEvent.InputTooShortError)
+                    _setupEvent.emit(SetupEvent.InputTooShortError)
                 }
                 trimmedUsername.length > MAX_USERNAME_LENGTH -> {
-                    _setupEvent.tryEmit(SetupEvent.InputTooLongError)
+                    _setupEvent.emit(SetupEvent.InputTooLongError)
                 }
-                else -> _setupEvent.tryEmit(SetupEvent.NavigateToSelectRoomEvent(username))
+                else -> _setupEvent.emit(SetupEvent.NavigateToSelectRoomEvent(username))
             }
         }
     }
@@ -72,20 +72,20 @@ class SetupViewModel @Inject constructor(
             val trimmedRoomName = room.name.trim()
             when {
                 trimmedRoomName.isEmpty() -> {
-                    _setupEvent.tryEmit(SetupEvent.InputEmptyError)
+                    _setupEvent.emit(SetupEvent.InputEmptyError)
                 }
                 trimmedRoomName.length < MIN_ROOM_NAME_LENGTH -> {
-                    _setupEvent.tryEmit(SetupEvent.InputTooShortError)
+                    _setupEvent.emit(SetupEvent.InputTooShortError)
                 }
                 trimmedRoomName.length > MAX_ROOM_NAME_LENGTH -> {
-                    _setupEvent.tryEmit(SetupEvent.InputTooLongError)
+                    _setupEvent.emit(SetupEvent.InputTooLongError)
                 }
                 else -> {
                     val result = repository.createRoom(room)
                     if (result is Resource.Success) {
-                        _setupEvent.tryEmit(SetupEvent.CreateRoomEvent(room))
+                        _setupEvent.emit(SetupEvent.CreateRoomEvent(room))
                     } else {
-                        _setupEvent.tryEmit(
+                        _setupEvent.emit(
                             SetupEvent.CreateRoomErrorEvent(
                                 result.message ?: return@launch
                             )
@@ -103,7 +103,7 @@ class SetupViewModel @Inject constructor(
             if(result is Resource.Success) {
                 _rooms.value = SetupEvent.GetRoomEvent(result.data ?: return@launch)
             } else {
-                _setupEvent.tryEmit(SetupEvent.GetRoomErrorEvent(result.message ?: return@launch))
+                _setupEvent.emit(SetupEvent.GetRoomErrorEvent(result.message ?: return@launch))
             }
         }
     }
@@ -112,9 +112,9 @@ class SetupViewModel @Inject constructor(
         viewModelScope.launch(dispatchers.main) {
             val result = repository.joinRoom(username, roomName)
             if(result is Resource.Success) {
-                _setupEvent.tryEmit(SetupEvent.JoinRoomEvent(roomName))
+                _setupEvent.emit(SetupEvent.JoinRoomEvent(roomName))
             } else {
-                _setupEvent.tryEmit(SetupEvent.JoinRoomErrorEvent(result.message ?: return@launch))
+                _setupEvent.emit(SetupEvent.JoinRoomErrorEvent(result.message ?: return@launch))
             }
         }
     }
