@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Doodlekong" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.DrawlingAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/bright_orange</item>
         <item name="colorOnPrimary">@color/white</item>
