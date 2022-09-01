@@ -8,7 +8,7 @@
         <item>7</item>
         <item>8</item>
     </string-array>
-    <string name="app_name">Doodlekong</string>
+    <string name="app_name">Drawling</string>
     <string name="apiBaseUrl">10.0.2.2:8001/ws/</string>
     <string name="choose_a_username">Choose a username</string>
     <string name="next">Next</string>
