@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.draw.drawlingandroid.R
 import com.draw.drawlingandroid.adapters.ChatMessageAdapter
+import com.draw.drawlingandroid.adapters.PlayerAdapter
 import com.draw.drawlingandroid.data.remote.ws.Room
 import com.draw.drawlingandroid.data.remote.ws.models.*
 import com.draw.drawlingandroid.databinding.ActivityDrawingBinding
@@ -42,8 +43,10 @@ class DrawingActivity : AppCompatActivity() {
     @Inject
     lateinit var clientId: String
 
-    private lateinit var toggle: ActionBarDrawerToggle
+    @Inject
+    private lateinit var playerAdapter: PlayerAdapter
     private lateinit var rvPlayers: RecyclerView
+    private lateinit var toggle: ActionBarDrawerToggle
 
     private lateinit var chatMessageAdapter: ChatMessageAdapter
 
@@ -69,6 +72,11 @@ class DrawingActivity : AppCompatActivity() {
         val header = layoutInflater.inflate(R.layout.nav_drawer_header, binding.navView)
         rvPlayers = header.findViewById(R.id.rvPlayers)
         binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+        rvPlayers.apply {
+            adapter = playerAdapter
+            layoutManager = LinearLayoutManager(this@DrawingActivity)
+        }
 
         binding.ibPlayers.setOnClickListener {
             binding.root.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
