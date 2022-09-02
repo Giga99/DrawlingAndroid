@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="@+id/tilUsername" />
 
     <ImageView
-        android:id="@+id/ivDoodlekong"
+        android:id="@+id/ivDrawling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/materialTextView2"
@@ -30,13 +30,13 @@
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/doodlekong"
+        android:text="@string/drawling"
         android:textStyle="bold"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivDoodlekong" />
+        app:layout_constraintTop_toBottomOf="@+id/ivDrawling" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUsername"

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/ivDoodleWorld"
+        android:id="@+id/ivDrawling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/tilRoomName"
@@ -14,7 +13,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_doodle_world" />
+        app:srcCompat="@drawable/ic_drawling_world" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvCreateRoom"
@@ -25,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivDoodleWorld" />
+        app:layout_constraintTop_toBottomOf="@+id/ivDrawling" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilRoomName"
@@ -43,10 +42,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etRoomName"
             style="@style/TextInputStyle"
-            android:maxLength="16"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text" />
+            android:inputType="text"
+            android:maxLength="16" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/ivDoodleWorld"
+        android:id="@+id/ivDrawling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/tilRoomName"
@@ -14,7 +14,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_doodle_world" />
+        app:srcCompat="@drawable/ic_drawling_world" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvCreateRoom"
@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivDoodleWorld" />
+        app:layout_constraintTop_toBottomOf="@+id/ivDrawling" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilRoomName"

@@ -41,7 +41,7 @@
     <string name="rationale_record_audio">To enable speech to text, you need to permit recording audio.</string>
     <string name="speech_to_text_info">Simply speak into your microphone to quickly guess words. To disable this function, press on the microphone icon again.</string>
     <string name="speech_not_available">Speech recognition is not available for your device.</string>
-    <string name="doodlekong">Doodlekong</string>
+    <string name="drawling">Drawling</string>
     <string name="choose_your_word">You are next, choose your word!</string>
     <string name="create_a_new_room">Create a New Room</string>
     <string name="search_for_rooms">Search for rooms...</string>
