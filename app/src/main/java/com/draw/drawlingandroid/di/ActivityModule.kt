@@ -17,41 +17,19 @@ import com.tinder.scarlet.websocket.okhttp.newWebSocketFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
-object DataModule {
+@InstallIn(ActivityRetainedComponent::class)
+object ActivityModule {
 
-    @Singleton
-    @Provides
-    fun provideGsonInstance(): Gson = Gson()
-
-    @Singleton
-    @Provides
-    fun provideOkHttpClient(clientId: String): OkHttpClient =
-        OkHttpClient.Builder()
-            .addInterceptor { chain ->
-                val url = chain.request().url.newBuilder()
-                    .addQueryParameter("client_id", clientId)
-                    .build()
-                val request = chain.request().newBuilder()
-                    .url(url)
-                    .build()
-                chain.proceed(request)
-            }
-            .addInterceptor(
-                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
-            )
-            .build()
-
-    @Singleton
+    @ActivityRetainedScoped
     @Provides
     fun provideSetupApi(okHttpClient: OkHttpClient): SetupApi =
         Retrofit.Builder()
@@ -61,7 +39,7 @@ object DataModule {
             .build()
             .create(SetupApi::class.java)
 
-    @Singleton
+    @ActivityRetainedScoped
     @Provides
     fun provideDrawingApi(
         app: Application,
@@ -78,7 +56,7 @@ object DataModule {
         .build()
         .create()
 
-    @Singleton
+    @ActivityRetainedScoped
     @Provides
     fun provideSetupRepository(
         setupApi: SetupApi,

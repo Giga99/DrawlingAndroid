@@ -1,12 +1,6 @@
 package com.draw.drawlingandroid.di
 
 import android.content.Context
-import com.draw.drawlingandroid.data.remote.api.SetupApi
-import com.draw.drawlingandroid.repository.DefaultSetupRepository
-import com.draw.drawlingandroid.repository.SetupRepository
-import com.draw.drawlingandroid.util.Constants.HTTP_BASE_URL
-import com.draw.drawlingandroid.util.Constants.HTTP_BASE_URL_LOCALHOST
-import com.draw.drawlingandroid.util.Constants.USE_LOCALHOST
 import com.draw.drawlingandroid.util.DispatcherProvider
 import com.draw.drawlingandroid.util.clientId
 import com.draw.drawlingandroid.util.dataStore
@@ -21,8 +15,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -52,4 +44,26 @@ object AppModule {
 
         }
     }
+
+    @Singleton
+    @Provides
+    fun provideGsonInstance(): Gson = Gson()
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(clientId: String): OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val url = chain.request().url.newBuilder()
+                    .addQueryParameter("client_id", clientId)
+                    .build()
+                val request = chain.request().newBuilder()
+                    .url(url)
+                    .build()
+                chain.proceed(request)
+            }
+            .addInterceptor(
+                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+            )
+            .build()
 }

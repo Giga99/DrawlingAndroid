@@ -211,6 +211,11 @@ class DrawingActivity : AppCompatActivity(), LifecycleEventObserver,
             }
         }
         lifecycleScope.launchWhenStarted {
+            viewModel.pathData.collect { pathData ->
+                binding.drawingView.setPaths(pathData)
+            }
+        }
+        lifecycleScope.launchWhenStarted {
             viewModel.chat.collect { chat ->
                 if (chatMessageAdapter.chatObjects.isEmpty()) {
                     updateChatMessageList(chat)
@@ -266,6 +271,7 @@ class DrawingActivity : AppCompatActivity(), LifecycleEventObserver,
                     val isUserDrawing = gameState.drawingPlayer == args.username
                     setColorGroupVisibility(isUserDrawing)
                     setMessageInputVisibility(!isUserDrawing)
+                    ibUndo.isEnabled = isUserDrawing
                     drawingView.isUserDrawing = isUserDrawing
                     ibMic.isVisible = !isUserDrawing
                     drawingView.isEnabled = isUserDrawing
