@@ -74,6 +74,12 @@ class DrawingActivity : AppCompatActivity() {
         binding.colorGroup.setOnCheckedChangeListener { _, checkedId ->
             viewModel.checkRadioButton(checkedId)
         }
+
+        binding.drawingView.setOnDrawListener {
+            if (binding.drawingView.isUserDrawing) {
+                viewModel.sendBaseModel(it)
+            }
+        }
     }
 
     private fun selectColor(color: Int) {
