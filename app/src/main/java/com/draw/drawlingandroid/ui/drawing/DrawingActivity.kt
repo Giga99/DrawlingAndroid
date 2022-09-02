@@ -22,6 +22,7 @@ import com.draw.drawlingandroid.adapters.PlayerAdapter
 import com.draw.drawlingandroid.data.remote.ws.Room
 import com.draw.drawlingandroid.data.remote.ws.models.*
 import com.draw.drawlingandroid.databinding.ActivityDrawingBinding
+import com.draw.drawlingandroid.ui.dialogs.LeaveDialog
 import com.draw.drawlingandroid.util.Constants
 import com.draw.drawlingandroid.util.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
@@ -402,5 +403,14 @@ class DrawingActivity : AppCompatActivity(), LifecycleEventObserver {
 
     private fun onAppInBackground() {
         viewModel.disconnect()
+    }
+
+    override fun onBackPressed() {
+        LeaveDialog().apply {
+            setPositiveClickListener {
+                viewModel.disconnect()
+                finish()
+            }
+        }.show(supportFragmentManager, null)
     }
 }
