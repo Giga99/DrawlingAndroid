@@ -6,6 +6,8 @@ object Constants {
     const val HTTP_BASE_URL = ""
     const val HTTP_BASE_URL_LOCALHOST = "http://10.0.2.2:8000"
 
+    const val DEFAULT_PAINT_THICKNESS = 12f
+
     const val MIN_USERNAME_LENGTH = 4
     const val MAX_USERNAME_LENGTH = 12
 
