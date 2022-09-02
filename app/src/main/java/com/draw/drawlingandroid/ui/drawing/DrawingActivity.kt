@@ -1,8 +1,12 @@
 package com.draw.drawlingandroid.ui.drawing
 
 import android.Manifest
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
@@ -26,6 +30,7 @@ import com.draw.drawlingandroid.data.remote.ws.models.*
 import com.draw.drawlingandroid.databinding.ActivityDrawingBinding
 import com.draw.drawlingandroid.ui.dialogs.LeaveDialog
 import com.draw.drawlingandroid.util.Constants
+import com.draw.drawlingandroid.util.Constants.MAX_WORD_VOICE_GUESS_AMOUNT
 import com.draw.drawlingandroid.util.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
 import com.tinder.scarlet.WebSocket
@@ -34,13 +39,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import java.util.*
 import javax.inject.Inject
 
 private const val REQUEST_CODE_RECORD_AUDIO = 1
 
 @AndroidEntryPoint
 class DrawingActivity : AppCompatActivity(), LifecycleEventObserver,
-    EasyPermissions.PermissionCallbacks {
+    EasyPermissions.PermissionCallbacks, RecognitionListener {
 
     private lateinit var binding: ActivityDrawingBinding
 
@@ -57,6 +63,9 @@ class DrawingActivity : AppCompatActivity(), LifecycleEventObserver,
     private lateinit var toggle: ActionBarDrawerToggle
 
     private lateinit var chatMessageAdapter: ChatMessageAdapter
+
+    private lateinit var speechRecognizer: SpeechRecognizer
+    private lateinit var speechIntent: Intent
 
     private var updateChatJob: Job? = null
     private var updatePlayersJob: Job? = null
@@ -105,6 +114,20 @@ class DrawingActivity : AppCompatActivity(), LifecycleEventObserver,
             override fun onDrawerStateChanged(newState: Int) = Unit
         })
 
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
+        speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.US)
+            putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)
+            putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, MAX_WORD_VOICE_GUESS_AMOUNT)
+        }
+        if (SpeechRecognizer.isRecognitionAvailable(this)) {
+            speechRecognizer.setRecognitionListener(this)
+        }
+
         binding.ibClearText.setOnClickListener {
             binding.etMessage.text?.clear()
         }
@@ -120,6 +143,16 @@ class DrawingActivity : AppCompatActivity(), LifecycleEventObserver,
             )
             binding.etMessage.text?.clear()
             hideKeyboard(binding.root)
+        }
+
+        binding.ibMic.setOnClickListener {
+            if (!viewModel.speechToTextEnabled.value && hasRecordAudioPermission()) {
+                viewModel.startListening()
+            } else if (!viewModel.speechToTextEnabled.value) {
+                requestRecordAudioPermission()
+            } else {
+                viewModel.stopListening()
+            }
         }
 
         binding.ibUndo.setOnClickListener {
@@ -163,6 +196,20 @@ class DrawingActivity : AppCompatActivity(), LifecycleEventObserver,
     }
 
     private fun subscribeToUiStateUpdates() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.speechToTextEnabled.collect { isEnabled ->
+                if (isEnabled && !SpeechRecognizer.isRecognitionAvailable(this@DrawingActivity)) {
+                    Toast.makeText(
+                        this@DrawingActivity,
+                        R.string.speech_not_available,
+                        Toast.LENGTH_LONG
+                    ).show()
+                    binding.ibMic.isEnabled = false
+                } else {
+                    setSpeechRecognitionEnabled(isEnabled)
+                }
+            }
+        }
         lifecycleScope.launchWhenStarted {
             viewModel.chat.collect { chat ->
                 if (chatMessageAdapter.chatObjects.isEmpty()) {
@@ -455,4 +502,46 @@ class DrawingActivity : AppCompatActivity(), LifecycleEventObserver,
             AppSettingsDialog.Builder(this).build().show()
         }
     }
+
+    private fun setSpeechRecognitionEnabled(isEnabled: Boolean) {
+        if (isEnabled) {
+            binding.ibMic.setImageResource(R.drawable.ic_mic)
+            speechRecognizer.startListening(speechIntent)
+        } else {
+            binding.ibMic.setImageResource(R.drawable.ic_mic_off)
+            binding.etMessage.hint = ""
+            speechRecognizer.stopListening()
+        }
+    }
+
+    override fun onReadyForSpeech(p0: Bundle?) {
+        binding.etMessage.text?.clear()
+        binding.etMessage.hint = getString(R.string.listening)
+    }
+
+    override fun onBeginningOfSpeech() = Unit
+
+    override fun onRmsChanged(p0: Float) = Unit
+
+    override fun onBufferReceived(p0: ByteArray?) = Unit
+
+    override fun onEndOfSpeech() {
+        viewModel.stopListening()
+    }
+
+    override fun onError(p0: Int) = Unit
+
+    override fun onResults(p0: Bundle?) {
+        val strings = p0?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+        val guessedWords = strings?.joinToString(" ")
+        guessedWords?.let {
+            binding.etMessage.setText(guessedWords)
+        }
+        speechRecognizer.stopListening()
+        viewModel.stopListening()
+    }
+
+    override fun onPartialResults(p0: Bundle?) = Unit
+
+    override fun onEvent(p0: Int, p1: Bundle?) = Unit
 }
