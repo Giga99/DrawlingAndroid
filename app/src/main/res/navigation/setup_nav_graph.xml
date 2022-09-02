@@ -43,7 +43,7 @@
         android:label="DrawingActivity" >
         <argument
             android:name="username"
-            app:argType="reference" />
+            app:argType="string" />
         <argument
             android:name="roomName"
             app:argType="string" />

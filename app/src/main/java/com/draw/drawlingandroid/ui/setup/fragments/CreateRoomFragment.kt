@@ -2,17 +2,19 @@ package com.draw.drawlingandroid.ui.setup.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.draw.drawlingandroid.R
 import com.draw.drawlingandroid.data.remote.ws.Room
 import com.draw.drawlingandroid.databinding.FragmentCreateRoomBinding
-import com.draw.drawlingandroid.ui.setup.SetupViewModel
+import com.draw.drawlingandroid.ui.setup.CreateRoomViewModel
+import com.draw.drawlingandroid.util.Constants
 import com.draw.drawlingandroid.util.navigateSafely
 import com.draw.drawlingandroid.util.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,13 +26,14 @@ class CreateRoomFragment : Fragment(R.layout.fragment_create_room) {
     private val binding: FragmentCreateRoomBinding
         get() = _binding!!
 
-    private val viewModel: SetupViewModel by activityViewModels()
+    private val viewModel: CreateRoomViewModel by viewModels()
 
     private val args: CreateRoomFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentCreateRoomBinding.bind(view)
+        requireActivity().window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         setupRoomSizeSpinner()
         listenToEvents()
 
@@ -49,26 +52,36 @@ class CreateRoomFragment : Fragment(R.layout.fragment_create_room) {
         lifecycleScope.launchWhenStarted {
             viewModel.setupEvent.collect { event ->
                 when (event) {
-                    is SetupViewModel.SetupEvent.CreateRoomEvent -> {
+                    is CreateRoomViewModel.SetupEvent.CreateRoomEvent -> {
                         viewModel.joinRoom(args.username, event.room.name)
                     }
-                    is SetupViewModel.SetupEvent.InputEmptyError -> {
+                    is CreateRoomViewModel.SetupEvent.InputEmptyError -> {
                         binding.createRoomProgressBar.isVisible = false
                         snackbar(R.string.error_field_empty)
                     }
-                    is SetupViewModel.SetupEvent.InputTooShortError -> {
+                    is CreateRoomViewModel.SetupEvent.InputTooShortError -> {
                         binding.createRoomProgressBar.isVisible = false
-                        snackbar(R.string.error_room_name_too_short)
+                        snackbar(
+                            getString(
+                                R.string.error_room_name_too_short,
+                                Constants.MIN_ROOM_NAME_LENGTH
+                            )
+                        )
                     }
-                    is SetupViewModel.SetupEvent.InputTooLongError -> {
+                    is CreateRoomViewModel.SetupEvent.InputTooLongError -> {
                         binding.createRoomProgressBar.isVisible = false
-                        snackbar(R.string.error_room_name_too_long)
+                        snackbar(
+                            getString(
+                                R.string.error_room_name_too_long,
+                                Constants.MAX_ROOM_NAME_LENGTH
+                            )
+                        )
                     }
-                    is SetupViewModel.SetupEvent.CreateRoomErrorEvent -> {
+                    is CreateRoomViewModel.SetupEvent.CreateRoomErrorEvent -> {
                         binding.createRoomProgressBar.isVisible = false
                         snackbar(event.error)
                     }
-                    is SetupViewModel.SetupEvent.JoinRoomEvent -> {
+                    is CreateRoomViewModel.SetupEvent.JoinRoomEvent -> {
                         binding.createRoomProgressBar.isVisible = false
                         findNavController().navigateSafely(
                             R.id.action_createRoomFragment_to_drawingActivity,
@@ -78,11 +91,10 @@ class CreateRoomFragment : Fragment(R.layout.fragment_create_room) {
                             }
                         )
                     }
-                    is SetupViewModel.SetupEvent.JoinRoomErrorEvent -> {
+                    is CreateRoomViewModel.SetupEvent.JoinRoomErrorEvent -> {
                         binding.createRoomProgressBar.isVisible = false
                         snackbar(event.error)
                     }
-                    else -> Unit
                 }
             }
         }
