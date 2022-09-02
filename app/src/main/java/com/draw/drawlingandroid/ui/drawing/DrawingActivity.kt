@@ -18,14 +18,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.draw.drawlingandroid.R
 import com.draw.drawlingandroid.adapters.ChatMessageAdapter
-import com.draw.drawlingandroid.data.remote.ws.models.DrawAction
-import com.draw.drawlingandroid.data.remote.ws.models.GameError
-import com.draw.drawlingandroid.data.remote.ws.models.JoinRoomHandshake
+import com.draw.drawlingandroid.data.remote.ws.models.*
 import com.draw.drawlingandroid.databinding.ActivityDrawingBinding
 import com.draw.drawlingandroid.util.Constants
 import com.google.android.material.snackbar.Snackbar
 import com.tinder.scarlet.WebSocket
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -45,6 +45,8 @@ class DrawingActivity : AppCompatActivity() {
 
     private lateinit var chatMessageAdapter: ChatMessageAdapter
 
+    private var updateChatJob: Job? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDrawingBinding.inflate(layoutInflater)
@@ -58,6 +60,9 @@ class DrawingActivity : AppCompatActivity() {
         toggle.syncState()
 
         binding.drawingView.roomName = args.roomName
+
+        chatMessageAdapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
         val header = layoutInflater.inflate(R.layout.nav_drawer_header, binding.navView)
         rvPlayers = header.findViewById(R.id.rvPlayers)
@@ -79,6 +84,22 @@ class DrawingActivity : AppCompatActivity() {
 
             override fun onDrawerStateChanged(newState: Int) = Unit
         })
+
+        binding.ibClearText.setOnClickListener {
+            binding.etMessage.text?.clear()
+        }
+
+        binding.ibSend.setOnClickListener {
+            viewModel.sendChatMessage(
+                ChatMessage(
+                    from = args.username,
+                    roomName = args.roomName,
+                    message = binding.etMessage.text.toString(),
+                    timestamp = System.currentTimeMillis()
+                )
+            )
+            binding.etMessage.text?.clear()
+        }
 
         binding.colorGroup.setOnCheckedChangeListener { _, checkedId ->
             viewModel.checkRadioButton(checkedId)
@@ -104,6 +125,13 @@ class DrawingActivity : AppCompatActivity() {
     }
 
     private fun subscribeToUiStateUpdates() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.chat.collect { chat ->
+                if (chatMessageAdapter.chatObjects.isEmpty()) {
+                    updateChatMessageList(chat)
+                }
+            }
+        }
         lifecycleScope.launchWhenStarted {
             viewModel.selectedColorButtonId.collect { id ->
                 binding.colorGroup.check(id)
@@ -154,6 +182,12 @@ class DrawingActivity : AppCompatActivity() {
                         }
                     }
                 }
+                is DrawingViewModel.SocketEvent.ChatMessageEvent -> addChatObjectToRecyclerView(
+                    event.data
+                )
+                is DrawingViewModel.SocketEvent.AnnouncementEvent -> addChatObjectToRecyclerView(
+                    event.data
+                )
                 is DrawingViewModel.SocketEvent.UndoEvent -> binding.drawingView.undo()
                 is DrawingViewModel.SocketEvent.GameErrorEvent -> {
                     when (event.data.errorType) {
@@ -190,6 +224,27 @@ class DrawingActivity : AppCompatActivity() {
                 }
                 else -> Unit
             }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.rvChat.layoutManager?.onSaveInstanceState()
+    }
+
+    private fun updateChatMessageList(chat: List<BaseModel>) {
+        updateChatJob?.cancel()
+        updateChatJob = lifecycleScope.launch {
+            chatMessageAdapter.updateDataset(chat)
+        }
+    }
+
+    private suspend fun addChatObjectToRecyclerView(chatObject: BaseModel) {
+        val canScrollDown = binding.rvChat.canScrollVertically(1)
+        updateChatMessageList(chatMessageAdapter.chatObjects + chatObject)
+        updateChatJob?.join()
+        if (!canScrollDown) {
+            binding.rvChat.scrollToPosition(chatMessageAdapter.chatObjects.size - 1)
         }
     }
 
