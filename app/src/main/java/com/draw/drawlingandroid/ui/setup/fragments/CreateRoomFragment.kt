@@ -15,6 +15,7 @@ import com.draw.drawlingandroid.data.remote.ws.Room
 import com.draw.drawlingandroid.databinding.FragmentCreateRoomBinding
 import com.draw.drawlingandroid.ui.setup.CreateRoomViewModel
 import com.draw.drawlingandroid.util.Constants
+import com.draw.drawlingandroid.util.hideKeyboard
 import com.draw.drawlingandroid.util.navigateSafely
 import com.draw.drawlingandroid.util.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +46,7 @@ class CreateRoomFragment : Fragment(R.layout.fragment_create_room) {
                     binding.tvMaxPersons.text.toString().toInt()
                 )
             )
+            requireActivity().hideKeyboard(binding.root)
         }
     }
 

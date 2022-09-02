@@ -21,6 +21,7 @@ import com.draw.drawlingandroid.adapters.ChatMessageAdapter
 import com.draw.drawlingandroid.data.remote.ws.models.*
 import com.draw.drawlingandroid.databinding.ActivityDrawingBinding
 import com.draw.drawlingandroid.util.Constants
+import com.draw.drawlingandroid.util.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
 import com.tinder.scarlet.WebSocket
 import dagger.hilt.android.AndroidEntryPoint
@@ -99,6 +100,7 @@ class DrawingActivity : AppCompatActivity() {
                 )
             )
             binding.etMessage.text?.clear()
+            hideKeyboard(binding.root)
         }
 
         binding.colorGroup.setOnCheckedChangeListener { _, checkedId ->

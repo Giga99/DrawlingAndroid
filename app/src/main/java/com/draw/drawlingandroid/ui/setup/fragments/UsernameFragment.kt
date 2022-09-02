@@ -11,6 +11,7 @@ import com.draw.drawlingandroid.databinding.FragmentUsernameBinding
 import com.draw.drawlingandroid.ui.setup.UsernameViewModel
 import com.draw.drawlingandroid.util.Constants.MAX_USERNAME_LENGTH
 import com.draw.drawlingandroid.util.Constants.MIN_USERNAME_LENGTH
+import com.draw.drawlingandroid.util.hideKeyboard
 import com.draw.drawlingandroid.util.navigateSafely
 import com.draw.drawlingandroid.util.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +35,7 @@ class UsernameFragment : Fragment(R.layout.fragment_username) {
             viewModel.validateUsernameAndNavigateToSelectRoom(
                 binding.etUsername.text.toString()
             )
+            requireActivity().hideKeyboard(binding.root)
         }
     }
 
