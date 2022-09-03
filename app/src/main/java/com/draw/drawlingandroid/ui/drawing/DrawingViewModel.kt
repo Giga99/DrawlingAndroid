@@ -3,10 +3,10 @@ package com.draw.drawlingandroid.ui.drawing
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.draw.drawlingandroid.R
-import com.draw.drawlingandroid.data.remote.ws.DrawingApi
 import com.draw.drawlingandroid.data.remote.ws.Room
 import com.draw.drawlingandroid.data.remote.ws.models.*
 import com.draw.drawlingandroid.data.remote.ws.models.DrawAction.Companion.ACTION_UNDO
+import com.draw.drawlingandroid.repository.DrawingRepository
 import com.draw.drawlingandroid.ui.views.DrawingView
 import com.draw.drawlingandroid.util.Constants.TYPE_DRAW_ACTION
 import com.draw.drawlingandroid.util.Constants.TYPE_DRAW_DATA
@@ -28,7 +28,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DrawingViewModel @Inject constructor(
-    private val drawingApi: DrawingApi,
+    private val drawingRepository: DrawingRepository,
     private val dispatchers: DispatcherProvider,
     private val gson: Gson
 ) : ViewModel() {
@@ -129,7 +129,7 @@ class DrawingViewModel @Inject constructor(
 
     private fun observeEvents() {
         viewModelScope.launch(dispatchers.io) {
-            drawingApi.observeEvents().collect { event ->
+            drawingRepository.observeEvents().collect { event ->
                 connectionEventChannel.send(event)
             }
         }
@@ -137,7 +137,7 @@ class DrawingViewModel @Inject constructor(
 
     private fun observeBaseModels() {
         viewModelScope.launch(dispatchers.io) {
-            drawingApi.observeBaseModels().collect { data ->
+            drawingRepository.observeBaseModels().collect { data ->
                 when (data) {
                     is DrawData -> {
                         socketEventChannel.send(SocketEvent.DrawDataEvent(data))
@@ -148,7 +148,7 @@ class DrawingViewModel @Inject constructor(
                         val drawActions = mutableListOf<BaseModel>()
                         data.data.forEach { drawAction ->
                             val jsonObject = JsonParser.parseString(drawAction).asJsonObject
-                            val type = when(jsonObject.get("type").asString) {
+                            val type = when (jsonObject.get("type").asString) {
                                 TYPE_DRAW_DATA -> DrawData::class.java
                                 TYPE_DRAW_ACTION -> DrawAction::class.java
                                 else -> BaseModel::class.java
@@ -200,13 +200,13 @@ class DrawingViewModel @Inject constructor(
             return
         }
         viewModelScope.launch(dispatchers.io) {
-            drawingApi.sendBaseModel(message)
+            drawingRepository.sendBaseModel(message)
         }
     }
 
     fun sendBaseModel(data: BaseModel) {
         viewModelScope.launch(dispatchers.io) {
-            drawingApi.sendBaseModel(data)
+            drawingRepository.sendBaseModel(data)
         }
     }
 }

@@ -6,7 +6,9 @@ import com.draw.drawlingandroid.data.remote.api.SetupApi
 import com.draw.drawlingandroid.data.remote.ws.CustomGsonMessageAdapter
 import com.draw.drawlingandroid.data.remote.ws.DrawingApi
 import com.draw.drawlingandroid.data.remote.ws.FlowStreamAdapter
+import com.draw.drawlingandroid.repository.DefaultDrawingRepository
 import com.draw.drawlingandroid.repository.DefaultSetupRepository
+import com.draw.drawlingandroid.repository.DrawingRepository
 import com.draw.drawlingandroid.repository.SetupRepository
 import com.draw.drawlingandroid.util.Constants
 import com.google.gson.Gson
@@ -23,7 +25,6 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
@@ -62,4 +63,10 @@ object ActivityModule {
         setupApi: SetupApi,
         @ApplicationContext context: Context
     ): SetupRepository = DefaultSetupRepository(setupApi, context)
+
+    @ActivityRetainedScoped
+    @Provides
+    fun provideDrawingRepository(
+        drawingApi: DrawingApi
+    ): DrawingRepository = DefaultDrawingRepository(drawingApi)
 }
