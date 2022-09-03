@@ -1,4 +1,4 @@
-package com.draw.drawlingandroid.ui.setup.fragments
+package com.draw.drawlingandroid.ui.setup.username
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.draw.drawlingandroid.R
 import com.draw.drawlingandroid.databinding.FragmentUsernameBinding
-import com.draw.drawlingandroid.ui.setup.UsernameViewModel
 import com.draw.drawlingandroid.util.Constants.MAX_USERNAME_LENGTH
 import com.draw.drawlingandroid.util.Constants.MIN_USERNAME_LENGTH
 import com.draw.drawlingandroid.util.hideKeyboard

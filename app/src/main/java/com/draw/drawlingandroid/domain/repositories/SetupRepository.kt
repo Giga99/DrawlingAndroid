@@ -1,4 +1,4 @@
-package com.draw.drawlingandroid.repository
+package com.draw.drawlingandroid.domain.repositories
 
 import com.draw.drawlingandroid.data.remote.ws.Room
 import com.draw.drawlingandroid.util.Resource

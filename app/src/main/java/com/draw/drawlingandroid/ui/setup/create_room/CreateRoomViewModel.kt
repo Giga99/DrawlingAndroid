@@ -1,9 +1,9 @@
-package com.draw.drawlingandroid.ui.setup
+package com.draw.drawlingandroid.ui.setup.create_room
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.draw.drawlingandroid.data.remote.ws.Room
-import com.draw.drawlingandroid.repository.SetupRepository
+import com.draw.drawlingandroid.domain.repositories.SetupRepository
 import com.draw.drawlingandroid.util.Constants.MAX_ROOM_NAME_LENGTH
 import com.draw.drawlingandroid.util.Constants.MIN_ROOM_NAME_LENGTH
 import com.draw.drawlingandroid.util.DispatcherProvider

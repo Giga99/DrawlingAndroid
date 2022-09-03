@@ -1,4 +1,4 @@
-package com.draw.drawlingandroid.adapters
+package com.draw.drawlingandroid.ui.adapters
 
 import android.graphics.Color
 import android.view.LayoutInflater

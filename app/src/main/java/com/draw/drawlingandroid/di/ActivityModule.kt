@@ -6,10 +6,10 @@ import com.draw.drawlingandroid.data.remote.api.SetupApi
 import com.draw.drawlingandroid.data.remote.ws.CustomGsonMessageAdapter
 import com.draw.drawlingandroid.data.remote.ws.DrawingApi
 import com.draw.drawlingandroid.data.remote.ws.FlowStreamAdapter
-import com.draw.drawlingandroid.repository.DefaultDrawingRepository
-import com.draw.drawlingandroid.repository.DefaultSetupRepository
-import com.draw.drawlingandroid.repository.DrawingRepository
-import com.draw.drawlingandroid.repository.SetupRepository
+import com.draw.drawlingandroid.data.datasource.DefaultDrawingRepository
+import com.draw.drawlingandroid.data.datasource.DefaultSetupRepository
+import com.draw.drawlingandroid.domain.repositories.DrawingRepository
+import com.draw.drawlingandroid.domain.repositories.SetupRepository
 import com.draw.drawlingandroid.util.Constants
 import com.google.gson.Gson
 import com.tinder.scarlet.Scarlet

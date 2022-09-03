@@ -1,4 +1,4 @@
-package com.draw.drawlingandroid.ui.setup.fragments
+package com.draw.drawlingandroid.ui.setup.select_room
 
 import android.os.Bundle
 import android.view.View
@@ -11,9 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.draw.drawlingandroid.R
-import com.draw.drawlingandroid.adapters.RoomAdapter
 import com.draw.drawlingandroid.databinding.FragmentSelectRoomBinding
-import com.draw.drawlingandroid.ui.setup.SelectRoomViewModel
+import com.draw.drawlingandroid.ui.adapters.RoomAdapter
 import com.draw.drawlingandroid.util.Constants.SEARCH_DELAY
 import com.draw.drawlingandroid.util.navigateSafely
 import com.draw.drawlingandroid.util.snackbar

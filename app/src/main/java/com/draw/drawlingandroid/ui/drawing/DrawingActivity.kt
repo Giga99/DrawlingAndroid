@@ -23,8 +23,8 @@ import androidx.navigation.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.draw.drawlingandroid.R
-import com.draw.drawlingandroid.adapters.ChatMessageAdapter
-import com.draw.drawlingandroid.adapters.PlayerAdapter
+import com.draw.drawlingandroid.ui.adapters.ChatMessageAdapter
+import com.draw.drawlingandroid.ui.adapters.PlayerAdapter
 import com.draw.drawlingandroid.data.remote.ws.Room
 import com.draw.drawlingandroid.data.remote.ws.models.*
 import com.draw.drawlingandroid.databinding.ActivityDrawingBinding

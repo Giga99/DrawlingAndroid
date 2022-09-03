@@ -1,8 +1,8 @@
-package com.draw.drawlingandroid.ui.setup
+package com.draw.drawlingandroid.ui.setup.username
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.draw.drawlingandroid.repository.SetupRepository
+import com.draw.drawlingandroid.domain.repositories.SetupRepository
 import com.draw.drawlingandroid.util.Constants.MAX_USERNAME_LENGTH
 import com.draw.drawlingandroid.util.Constants.MIN_USERNAME_LENGTH
 import com.draw.drawlingandroid.util.DispatcherProvider

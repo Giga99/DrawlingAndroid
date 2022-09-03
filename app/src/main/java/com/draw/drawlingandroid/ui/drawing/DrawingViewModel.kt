@@ -6,7 +6,7 @@ import com.draw.drawlingandroid.R
 import com.draw.drawlingandroid.data.remote.ws.Room
 import com.draw.drawlingandroid.data.remote.ws.models.*
 import com.draw.drawlingandroid.data.remote.ws.models.DrawAction.Companion.ACTION_UNDO
-import com.draw.drawlingandroid.repository.DrawingRepository
+import com.draw.drawlingandroid.domain.repositories.DrawingRepository
 import com.draw.drawlingandroid.ui.views.DrawingView
 import com.draw.drawlingandroid.util.Constants.TYPE_DRAW_ACTION
 import com.draw.drawlingandroid.util.Constants.TYPE_DRAW_DATA

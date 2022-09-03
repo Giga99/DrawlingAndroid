@@ -1,4 +1,4 @@
-package com.draw.drawlingandroid.ui.setup.fragments
+package com.draw.drawlingandroid.ui.setup.create_room
 
 import android.os.Bundle
 import android.view.View
@@ -13,7 +13,6 @@ import androidx.navigation.fragment.navArgs
 import com.draw.drawlingandroid.R
 import com.draw.drawlingandroid.data.remote.ws.Room
 import com.draw.drawlingandroid.databinding.FragmentCreateRoomBinding
-import com.draw.drawlingandroid.ui.setup.CreateRoomViewModel
 import com.draw.drawlingandroid.util.Constants
 import com.draw.drawlingandroid.util.hideKeyboard
 import com.draw.drawlingandroid.util.navigateSafely

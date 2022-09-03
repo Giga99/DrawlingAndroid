@@ -1,7 +1,8 @@
-package com.draw.drawlingandroid.repository
+package com.draw.drawlingandroid.data.datasource
 
 import com.draw.drawlingandroid.data.remote.ws.DrawingApi
 import com.draw.drawlingandroid.data.remote.ws.models.BaseModel
+import com.draw.drawlingandroid.domain.repositories.DrawingRepository
 import com.tinder.scarlet.WebSocket
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

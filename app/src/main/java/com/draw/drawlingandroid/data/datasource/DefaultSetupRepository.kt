@@ -1,9 +1,10 @@
-package com.draw.drawlingandroid.repository
+package com.draw.drawlingandroid.data.datasource
 
 import android.content.Context
 import com.draw.drawlingandroid.R
 import com.draw.drawlingandroid.data.remote.api.SetupApi
 import com.draw.drawlingandroid.data.remote.ws.Room
+import com.draw.drawlingandroid.domain.repositories.SetupRepository
 import com.draw.drawlingandroid.util.Resource
 import com.draw.drawlingandroid.util.checkForInternetConnection
 import retrofit2.HttpException
@@ -27,9 +28,8 @@ class DefaultSetupRepository @Inject constructor(
             return Resource.Error(context.getString(R.string.check_internet_connection))
         }
 
-        return if (response.isSuccessful && response.body()?.successful == true) Resource.Success(
-            Unit
-        )
+        return if (response.isSuccessful && response.body()?.successful == true)
+            Resource.Success(Unit)
         else if (response.body()?.successful == false) Resource.Error(response.body()!!.message!!)
         else Resource.Error(context.getString(R.string.error_unknown))
     }
@@ -62,7 +62,8 @@ class DefaultSetupRepository @Inject constructor(
             return Resource.Error(context.getString(R.string.check_internet_connection))
         }
 
-        return if (response.isSuccessful && response.body()?.successful == true) Resource.Success(Unit)
+        return if (response.isSuccessful && response.body()?.successful == true)
+            Resource.Success(Unit)
         else if (response.body()?.successful == false) Resource.Error(response.body()!!.message!!)
         else Resource.Error(context.getString(R.string.error_unknown))
     }

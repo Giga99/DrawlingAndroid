@@ -1,9 +1,9 @@
-package com.draw.drawlingandroid.ui.setup
+package com.draw.drawlingandroid.ui.setup.select_room
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.draw.drawlingandroid.data.remote.ws.Room
-import com.draw.drawlingandroid.repository.SetupRepository
+import com.draw.drawlingandroid.domain.repositories.SetupRepository
 import com.draw.drawlingandroid.util.DispatcherProvider
 import com.draw.drawlingandroid.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
