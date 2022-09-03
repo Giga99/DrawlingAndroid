@@ -2,6 +2,7 @@ package com.draw.drawlingandroid.data.remote.api
 
 import com.draw.drawlingandroid.data.remote.responses.BasicApiResponse
 import com.draw.drawlingandroid.data.remote.ws.Room
+import com.draw.drawlingandroid.data.remote.ws.WordList
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -25,4 +26,7 @@ interface SetupApi {
         @Query("username") username: String,
         @Query("roomName") roomName: String
     ): Response<BasicApiResponse>
+
+    @GET("api/getAvailableWordLists")
+    suspend fun getAvailableWordLists(): Response<List<WordList>>
 }

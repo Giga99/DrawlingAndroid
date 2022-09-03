@@ -1,6 +1,7 @@
 package com.draw.drawlingandroid.domain.repositories
 
 import com.draw.drawlingandroid.data.remote.ws.Room
+import com.draw.drawlingandroid.data.remote.ws.WordList
 import com.draw.drawlingandroid.util.Resource
 
 interface SetupRepository {
@@ -10,4 +11,6 @@ interface SetupRepository {
     suspend fun getRooms(searchQuery: String): Resource<List<Room>>
 
     suspend fun joinRoom(username: String, roomName: String): Resource<Unit>
+
+    suspend fun getAvailableWordList(): Resource<List<WordList>>
 }

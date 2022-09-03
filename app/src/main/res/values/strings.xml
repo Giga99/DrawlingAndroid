@@ -38,6 +38,8 @@
     <string name="dialog_yes">yes</string>
     <string name="dialog_leave_no">no</string>
     <string name="room_size">Room Size</string>
+    <string name="room_word_list">Room Word List</string>
+    <string name="default_word_list">Default Word List</string>
     <string name="rationale_record_audio">To enable speech to text, you need to permit recording audio.</string>
     <string name="speech_to_text_info">Simply speak into your microphone to quickly guess words. To disable this function, press on the microphone icon again.</string>
     <string name="speech_not_available">Speech recognition is not available for your device.</string>

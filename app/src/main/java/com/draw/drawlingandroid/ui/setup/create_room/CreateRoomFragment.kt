@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.draw.drawlingandroid.R
-import com.draw.drawlingandroid.data.remote.ws.Room
 import com.draw.drawlingandroid.databinding.FragmentCreateRoomBinding
 import com.draw.drawlingandroid.util.Constants
 import com.draw.drawlingandroid.util.hideKeyboard
@@ -35,15 +34,15 @@ class CreateRoomFragment : Fragment(R.layout.fragment_create_room) {
         _binding = FragmentCreateRoomBinding.bind(view)
         requireActivity().window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         setupRoomSizeSpinner()
+        setupWordListSpinner()
         listenToEvents()
 
         binding.btnCreateRoom.setOnClickListener {
             binding.createRoomProgressBar.isVisible = true
             viewModel.createRoom(
-                Room(
-                    binding.etRoomName.text.toString(),
-                    binding.tvMaxPersons.text.toString().toInt()
-                )
+                roomName = binding.etRoomName.text.toString(),
+                maxPlayers = binding.tvMaxPersons.text.toString().toInt(),
+                wordListUiValue = binding.tvRoomWordList.text.toString()
             )
             requireActivity().hideKeyboard(binding.root)
         }
@@ -105,6 +104,20 @@ class CreateRoomFragment : Fragment(R.layout.fragment_create_room) {
         val roomSizes = resources.getStringArray(R.array.room_size_array)
         val adapter = ArrayAdapter(requireContext(), R.layout.textview_room_size, roomSizes)
         binding.tvMaxPersons.setAdapter(adapter)
+    }
+
+    private fun setupWordListSpinner() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.wordLists.collect { wordLists ->
+                val adapter =
+                    ArrayAdapter(
+                        requireContext(),
+                        R.layout.textview_room_word_list,
+                        wordLists.map { it.uiValue }
+                    )
+                binding.tvRoomWordList.setAdapter(adapter)
+            }
+        }
     }
 
     override fun onDestroy() {
