@@ -6,4 +6,4 @@ import javax.inject.Qualifier
 annotation class ApiUrl
 
 @Qualifier
-annotation class WebSocketUrl
+annotation class DrawWebSocketUrl

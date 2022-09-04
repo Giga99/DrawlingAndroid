@@ -26,11 +26,11 @@ object AppModule {
         @ApplicationContext context: Context
     ): String = context.getString(R.string.api_url)
 
-    @WebSocketUrl
+    @DrawWebSocketUrl
     @Provides
-    fun provideWebSocketUrl(
+    fun provideDrawWebSocketUrl(
         @ApplicationContext context: Context
-    ): String = context.getString(R.string.web_socket_url)
+    ): String = "${context.getString(R.string.api_url)}ws/draw"
 
     @Singleton
     @Provides

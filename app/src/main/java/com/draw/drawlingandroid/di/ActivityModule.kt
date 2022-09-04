@@ -12,7 +12,7 @@ import com.draw.drawlingandroid.domain.repositories.DrawingRepository
 import com.draw.drawlingandroid.domain.repositories.SetupRepository
 import com.draw.drawlingandroid.util.ApiUrl
 import com.draw.drawlingandroid.util.Constants
-import com.draw.drawlingandroid.util.WebSocketUrl
+import com.draw.drawlingandroid.util.DrawWebSocketUrl
 import com.google.gson.Gson
 import com.tinder.scarlet.Scarlet
 import com.tinder.scarlet.lifecycle.android.AndroidLifecycle
@@ -48,7 +48,7 @@ object ActivityModule {
     @ActivityRetainedScoped
     @Provides
     fun provideDrawingApi(
-        @WebSocketUrl webSocketUrl: String,
+        @DrawWebSocketUrl webSocketUrl: String,
         app: Application,
         okHttpClient: OkHttpClient,
         gson: Gson
