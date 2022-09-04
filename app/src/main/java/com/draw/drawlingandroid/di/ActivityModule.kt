@@ -2,15 +2,17 @@ package com.draw.drawlingandroid.di
 
 import android.app.Application
 import android.content.Context
+import com.draw.drawlingandroid.data.datasource.DefaultDrawingRepository
+import com.draw.drawlingandroid.data.datasource.DefaultSetupRepository
 import com.draw.drawlingandroid.data.remote.api.SetupApi
 import com.draw.drawlingandroid.data.remote.ws.CustomGsonMessageAdapter
 import com.draw.drawlingandroid.data.remote.ws.DrawingApi
 import com.draw.drawlingandroid.data.remote.ws.FlowStreamAdapter
-import com.draw.drawlingandroid.data.datasource.DefaultDrawingRepository
-import com.draw.drawlingandroid.data.datasource.DefaultSetupRepository
 import com.draw.drawlingandroid.domain.repositories.DrawingRepository
 import com.draw.drawlingandroid.domain.repositories.SetupRepository
+import com.draw.drawlingandroid.util.ApiUrl
 import com.draw.drawlingandroid.util.Constants
+import com.draw.drawlingandroid.util.WebSocketUrl
 import com.google.gson.Gson
 import com.tinder.scarlet.Scarlet
 import com.tinder.scarlet.lifecycle.android.AndroidLifecycle
@@ -32,9 +34,12 @@ object ActivityModule {
 
     @ActivityRetainedScoped
     @Provides
-    fun provideSetupApi(okHttpClient: OkHttpClient): SetupApi =
+    fun provideSetupApi(
+        @ApiUrl apiUrl: String,
+        okHttpClient: OkHttpClient
+    ): SetupApi =
         Retrofit.Builder()
-            .baseUrl(if (Constants.USE_LOCALHOST) Constants.HTTP_BASE_URL_LOCALHOST else Constants.HTTP_BASE_URL)
+            .baseUrl(apiUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -43,6 +48,7 @@ object ActivityModule {
     @ActivityRetainedScoped
     @Provides
     fun provideDrawingApi(
+        @WebSocketUrl webSocketUrl: String,
         app: Application,
         okHttpClient: OkHttpClient,
         gson: Gson
@@ -50,7 +56,7 @@ object ActivityModule {
         .backoffStrategy(LinearBackoffStrategy(Constants.RECONNECT_INTERVAL))
         .lifecycle(AndroidLifecycle.ofApplicationForeground(app))
         .webSocketFactory(
-            okHttpClient.newWebSocketFactory(if (Constants.USE_LOCALHOST) Constants.WS_BASE_URL_LOCALHOST else Constants.WS_BASE_URL)
+            okHttpClient.newWebSocketFactory(webSocketUrl)
         )
         .addStreamAdapterFactory(FlowStreamAdapter.Factory)
         .addMessageAdapterFactory(CustomGsonMessageAdapter.Factory(gson))

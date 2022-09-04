@@ -1,0 +1,4 @@
+<resources>
+    <string name="api_url">https://ktor-drawling.herokuapp.com/</string>
+    <string name="web_socket_url">https://ktor-drawling.herokuapp.com/ws/draw</string>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="api_url">http://10.0.2.2:8000/</string>
+    <string name="web_socket_url">http://10.0.2.2:8000/ws/draw</string>
+</resources>

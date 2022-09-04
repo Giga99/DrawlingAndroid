@@ -1,9 +1,8 @@
 package com.draw.drawlingandroid.di
 
 import android.content.Context
-import com.draw.drawlingandroid.util.DispatcherProvider
-import com.draw.drawlingandroid.util.clientId
-import com.draw.drawlingandroid.util.dataStore
+import com.draw.drawlingandroid.R
+import com.draw.drawlingandroid.util.*
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -20,6 +19,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @ApiUrl
+    @Provides
+    fun provideApiUrl(
+        @ApplicationContext context: Context
+    ): String = context.getString(R.string.api_url)
+
+    @WebSocketUrl
+    @Provides
+    fun provideWebSocketUrl(
+        @ApplicationContext context: Context
+    ): String = context.getString(R.string.web_socket_url)
 
     @Singleton
     @Provides
