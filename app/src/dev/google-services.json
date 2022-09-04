@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "543311794038",
+    "project_id": "drawlingdev-fe9a9",
+    "storage_bucket": "drawlingdev-fe9a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543311794038:android:8197f6c3884cdd6b1af457",
+        "android_client_info": {
+          "package_name": "com.draw.drawlingandroid.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543311794038-r58facgmstsog5iu9gkmp6oki96ppgad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.draw.drawlingandroid.dev",
+            "certificate_hash": "861c7a4caf31a45b2866696c45c4296370108918"
+          }
+        },
+        {
+          "client_id": "543311794038-b7i5mbb0pen2vu5buq682o1k6k2ccihn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPifLobxP2SmiaT7HEuu1MXdLvEC2VMQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543311794038-b7i5mbb0pen2vu5buq682o1k6k2ccihn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

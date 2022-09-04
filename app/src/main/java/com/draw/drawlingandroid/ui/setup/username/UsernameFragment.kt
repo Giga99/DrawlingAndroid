@@ -14,6 +14,7 @@ import com.draw.drawlingandroid.util.hideKeyboard
 import com.draw.drawlingandroid.util.navigateSafely
 import com.draw.drawlingandroid.util.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.RuntimeException
 
 @AndroidEntryPoint
 class UsernameFragment : Fragment(R.layout.fragment_username) {

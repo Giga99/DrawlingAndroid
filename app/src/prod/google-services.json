@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "967552995056",
+    "project_id": "drawling-2139b",
+    "storage_bucket": "drawling-2139b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967552995056:android:c4e7f17fd7ea21c7c07c35",
+        "android_client_info": {
+          "package_name": "com.draw.drawlingandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967552995056-bfoudmgll0q1gu80jptb4vdo6fgcubsi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAix7wS8G7nnwGYsiqY0uDA5FB4TzzJYgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967552995056-bfoudmgll0q1gu80jptb4vdo6fgcubsi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

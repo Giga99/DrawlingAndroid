@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -118,4 +120,9 @@ dependencies {
 
     // Lottie
     implementation 'com.airbnb.android:lottie:3.4.4'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:30.4.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 }
