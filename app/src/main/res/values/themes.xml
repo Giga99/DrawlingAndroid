@@ -7,7 +7,7 @@
         <item name="colorSecondary">@color/green</item>
         <item name="colorSecondaryVariant">@color/light_green</item>
         <item name="colorOnSecondary">@color/black</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <item name="android:statusBarColor">@color/white</item>
         <item name="android:textViewStyle">@style/TextViewStyle</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="textInputStyle">@style/TextInputStyle</item>

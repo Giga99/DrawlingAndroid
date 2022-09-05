@@ -7,10 +7,23 @@
         <entry key="app/src/main/res/drawable-v24/drawling_shape_background.xml" value="0.268" />
         <entry key="app/src/main/res/drawable-v24/ic_appicon.xml" value="0.2835" />
         <entry key="app/src/main/res/drawable-v24/ic_appicon_v2.xml" value="0.268" />
+        <entry key="app/src/main/res/drawable-v24/ic_baseline_arrow_drop_down_24.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable-v24/ic_baseline_send_24.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable-v24/ic_baseline_undo_24.xml" value="0.261" />
         <entry key="app/src/main/res/drawable-v24/ic_drawling_wifi.xml" value="0.268" />
+        <entry key="app/src/main/res/drawable-v24/ic_eraser.xml" value="0.261" />
         <entry key="app/src/main/res/drawable-v24/ic_eraser_checked.xml" value="0.2605" />
         <entry key="app/src/main/res/drawable-v24/ic_eraser_unchecked.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable-v24/ic_happy_monkey.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.261" />
         <entry key="app/src/main/res/drawable-v24/ic_mic.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable-v24/ic_pencil.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable-v24/ic_person.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable-v24/ic_refresh.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable-v24/ic_sad_monkey.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable-v24/shape_incoming_message.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable-v24/shape_outgoing_message.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable-v24/text_input_box_selector.xml" value="0.261" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2835" />
         <entry key="app/src/main/res/layout/activity_drawing.xml" value="0.3885416666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37447916666666664" />
