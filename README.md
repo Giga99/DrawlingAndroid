@@ -13,4 +13,4 @@ Some of the features of the app:
 
 Let the best guesser win!
 
-Server is written in Ktor and you can find it [here](https://github.com/Giga99/DrawlingServer).
+The server is written in Ktor and you can find it [here](https://github.com/Giga99/DrawlingServer).
