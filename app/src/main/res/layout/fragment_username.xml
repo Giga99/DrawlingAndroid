@@ -24,7 +24,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_appicon_v2" />
+        app:srcCompat="@drawable/ic_appicon" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvWelcome"

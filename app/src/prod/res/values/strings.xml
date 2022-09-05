@@ -1,3 +1,4 @@
 <resources>
+    <string name="app_name">Drawling</string>
     <string name="api_url">https://ktor-drawling.herokuapp.com/</string>
 </resources>
