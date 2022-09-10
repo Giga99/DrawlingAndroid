@@ -22,7 +22,7 @@ import com.tinder.scarlet.MessageAdapter
 import java.lang.reflect.Type
 
 class CustomGsonMessageAdapter<T> private constructor(
-    val gson: Gson
+    private val gson: Gson
 ) : MessageAdapter<T> {
 
     override fun fromMessage(message: Message): T {
