@@ -155,6 +155,15 @@ class DrawingActivity : AppCompatActivity(), LifecycleEventObserver,
             }
         }
 
+        binding.ibExit.setOnClickListener {
+            LeaveDialog().apply {
+                setPositiveClickListener {
+                    viewModel.disconnect()
+                    finish()
+                }
+            }.show(supportFragmentManager, null)
+        }
+
         binding.ibUndo.setOnClickListener {
             if (binding.drawingView.isUserDrawing) {
                 binding.drawingView.undo()

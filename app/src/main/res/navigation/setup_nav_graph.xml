@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/usernameFragment"
         android:name="com.draw.drawlingandroid.ui.setup.username.UsernameFragment"
-        android:label="UsernameFragment" >
+        android:label="UsernameFragment">
         <action
             android:id="@+id/action_usernameFragment_to_selectRoomFragment"
             app:destination="@id/selectRoomFragment" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/selectRoomFragment"
         android:name="com.draw.drawlingandroid.ui.setup.select_room.SelectRoomFragment"
-        android:label="SelectRoomFragment" >
+        android:label="SelectRoomFragment">
         <action
             android:id="@+id/action_selectRoomFragment_to_createRoomFragment"
             app:destination="@id/createRoomFragment" />
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/createRoomFragment"
         android:name="com.draw.drawlingandroid.ui.setup.create_room.CreateRoomFragment"
-        android:label="CreateRoomFragment" >
+        android:label="CreateRoomFragment">
         <action
             android:id="@+id/action_createRoomFragment_to_drawingActivity"
             app:destination="@id/drawingActivity" />
@@ -40,7 +40,7 @@
     <activity
         android:id="@+id/drawingActivity"
         android:name="com.draw.drawlingandroid.ui.drawing.DrawingActivity"
-        android:label="DrawingActivity" >
+        android:label="DrawingActivity">
         <argument
             android:name="username"
             app:argType="string" />

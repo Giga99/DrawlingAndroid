@@ -8,7 +8,7 @@
         android:id="@+id/ivDrawling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/tilRoomName"
+        android:layout_marginTop="@dimen/margin_xxxlarge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,10 +17,13 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvCreateRoom"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"
         android:text="@string/create_a_new_room"
-        android:textSize="50sp"
+        android:textAlignment="center"
+        android:textSize="@dimen/create_room_title_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,13 +34,13 @@
         style="@style/TextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
+        android:layout_marginHorizontal="@dimen/margin_xxxlarge"
+        android:layout_marginTop="@dimen/margin_large"
         android:hint="@string/room_name"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tvCreateRoom">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etRoomName"
@@ -54,7 +57,7 @@
         style="@style/DropDownStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_standard"
         android:hint="@string/room_word_list"
         app:layout_constraintEnd_toEndOf="@+id/tilRoomName"
         app:layout_constraintStart_toStartOf="@+id/tilRoomName"
@@ -74,14 +77,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilRoomSize"
         style="@style/DropDownStyle"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/margin_standard"
         android:hint="@string/room_size"
-        app:layout_constraintEnd_toStartOf="@+id/btnCreateRoom"
-        app:layout_constraintStart_toStartOf="@+id/tilRoomName"
-        app:layout_constraintTop_toBottomOf="@+id/tilRoomWordList">
+        app:layout_constraintEnd_toEndOf="@id/tilRoomWordList"
+        app:layout_constraintStart_toStartOf="@id/tilRoomWordList"
+        app:layout_constraintTop_toBottomOf="@id/tilRoomWordList">
 
         <AutoCompleteTextView
             android:id="@+id/tvMaxPersons"
@@ -98,15 +100,16 @@
         android:id="@+id/btnCreateRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_standard"
         android:text="@string/create_room"
-        app:layout_constraintBottom_toBottomOf="@+id/tilRoomSize"
         app:layout_constraintEnd_toEndOf="@+id/tilRoomWordList"
-        app:layout_constraintTop_toTopOf="@+id/tilRoomSize" />
+        app:layout_constraintStart_toStartOf="@+id/tilRoomWordList"
+        app:layout_constraintTop_toBottomOf="@+id/tilRoomSize" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/createRoomProgressBar"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/loading_animation_size"
+        android:layout_height="@dimen/loading_animation_size"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

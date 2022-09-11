@@ -24,45 +24,45 @@
         <RadioGroup
             android:id="@+id/colorGroup"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/color_group_height"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/drawingView">
 
             <com.draw.drawlingandroid.ui.views.ColorRadioButton
                 android:id="@+id/rbRed"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/color_size"
+                android:layout_height="@dimen/color_size"
                 app:buttonColor="@color/red" />
 
             <com.draw.drawlingandroid.ui.views.ColorRadioButton
                 android:id="@+id/rbGreen"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/color_size"
+                android:layout_height="@dimen/color_size"
                 app:buttonColor="@color/green" />
 
             <com.draw.drawlingandroid.ui.views.ColorRadioButton
                 android:id="@+id/rbBlue"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/color_size"
+                android:layout_height="@dimen/color_size"
                 app:buttonColor="@android:color/holo_blue_dark" />
 
             <com.draw.drawlingandroid.ui.views.ColorRadioButton
                 android:id="@+id/rbOrange"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/color_size"
+                android:layout_height="@dimen/color_size"
                 app:buttonColor="@color/orange" />
 
             <com.draw.drawlingandroid.ui.views.ColorRadioButton
                 android:id="@+id/rbYellow"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/color_size"
+                android:layout_height="@dimen/color_size"
                 app:buttonColor="@color/yellow" />
 
             <com.draw.drawlingandroid.ui.views.ColorRadioButton
                 android:id="@+id/rbBlack"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/color_size"
+                android:layout_height="@dimen/color_size"
                 android:checked="true"
                 app:buttonColor="@color/black" />
 
@@ -70,7 +70,7 @@
                 android:id="@+id/rbEraser"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:padding="6dp"
+                android:padding="@dimen/padding_xstandard"
                 app:checkedDrawable="@drawable/ic_eraser_checked"
                 app:uncheckedDrawable="@drawable/ic_eraser_unchecked" />
 
@@ -91,7 +91,7 @@
             style="@style/HorizontalProgressBarStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="10dp"
+            android:minHeight="@dimen/progress_bar_min_height"
             android:progress="100"
             app:layout_constraintEnd_toEndOf="@id/tvCurWord"
             app:layout_constraintStart_toStartOf="@id/tvCurWord"
@@ -118,8 +118,8 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/connectionProgressBar"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="@dimen/loading_animation_size"
+            android:layout_height="@dimen/loading_animation_size"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/rvChat"
             app:layout_constraintEnd_toEndOf="@+id/rvChat"
@@ -131,7 +131,7 @@
 
         <LinearLayout
             android:id="@+id/llActions"
-            android:layout_width="36dp"
+            android:layout_width="@dimen/drawing_actions_width"
             android:layout_height="0dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/tilMessage"
@@ -151,6 +151,13 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 app:srcCompat="@drawable/ic_mic_off" />
+
+            <ImageButton
+                android:id="@+id/ibExit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/ic_exit" />
 
         </LinearLayout>
 
@@ -175,7 +182,7 @@
             android:id="@+id/ibClearText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/margin_standard"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_round_clear_24"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -186,7 +193,7 @@
             android:id="@+id/ibSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/margin_small"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_send_24"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -209,7 +216,7 @@
                 android:id="@+id/ivHappyMonkey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="@dimen/margin_xxxlarge"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -222,7 +229,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/choose_your_word"
-                android:textSize="35sp"
+                android:textSize="@dimen/text_size_xxxxlarge"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -230,9 +237,10 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnFirstWord"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
+                android:layout_marginHorizontal="@dimen/margin_xxxxxxlarge"
+                android:layout_marginBottom="@dimen/margin_xmedium"
                 android:text="First Word"
                 app:layout_constraintBottom_toTopOf="@+id/btnSecondWord"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -243,9 +251,10 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSecondWord"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
+                android:layout_marginHorizontal="@dimen/margin_xxxxxxlarge"
+                android:layout_marginBottom="@dimen/margin_xmedium"
                 android:text="Second Word"
                 app:layout_constraintBottom_toTopOf="@+id/btnThirdWord"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -256,9 +265,10 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnThirdWord"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
+                android:layout_marginHorizontal="@dimen/margin_xxxxxxlarge"
+                android:layout_marginBottom="@dimen/margin_xmedium"
                 android:text="Third Word"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -272,7 +282,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="30"
-                android:textSize="50sp"
+                android:textSize="@dimen/text_size_timer"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -285,7 +295,7 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/navigation_view_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="false"
