@@ -2,6 +2,11 @@
 
 <h3 align="center">Repository for the Drawling android app</h3>
 
+<p align="center">
+ <img src="https://PlayBadges.pavi2410.me/badge/downloads?id=com.draw.drawlingandroid&pretty"/>
+ <img src="https://PlayBadges.pavi2410.me/badge/ratings?id=com.draw.drawlingandroid&pretty" />
+</p>
+
 Drawling is the next generation's beautifully and simply designed a multiplayer android app where you draw and your friends guess what you drew.
 
 Some of the features of the app:
